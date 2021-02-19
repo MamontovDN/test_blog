@@ -16,7 +16,7 @@ services:
     image: mamontovdn/testblog:v1
     restart: always
     volumes:
-      - static:./static/
+      - static:/static/
     depends_on:
       - db
     env_file:
