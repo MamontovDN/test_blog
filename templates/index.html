@@ -1,0 +1,10 @@
+{% extends "base.html" %}
+{% block title %} {{ title }} {% endblock %}
+{% block header %}{{ title }}{% endblock %}
+{% block content %}
+    <div class="container">
+            {% for post in page %}
+                {% include "includes/post_card.html" with post=post %}
+            {% endfor %}
+    </div>
+{% endblock %}

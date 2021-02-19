@@ -1,0 +1,34 @@
+{% extends "base.html" %}
+{% block title %}{{ title}}{% endblock %}
+{% block header %}{{ title}}{% endblock %}
+{% block content %}
+{% load my_filters %}
+<form method="post" enctype="multipart/form-data">
+    {% csrf_token %}
+    {% for field in form %}
+        <div class="form-group row" aria-required="true">
+                <label for="{{ field.id_for_label }}" class="col-md-4 col-form-label text-md-right">
+                    {{ field.label }}
+                </label>
+                <div class="col-md-6">
+                    {{ field|addclass:"form-control" }}
+                    {% if field.help_text %}
+                        <small id="{{ field.id_for_label }}-help" class="form-text text-muted">
+                            {{ field.help_text|safe }}
+                        </small>
+                    {% endif %}
+                    {% if field.errors %}
+                        {% for error in field.errors %}
+                            <div class="alert alert-danger" role="alert">
+                                {{ error|escape }}
+                            </div>
+                        {% endfor %}
+                    {% endif %}
+                </div>
+        </div>
+    {% endfor %}
+    <div class="col-md-6 offset-md-4">
+        <button type="submit">Добавить</button>
+    </div>
+</form>
+{% endblock %}
